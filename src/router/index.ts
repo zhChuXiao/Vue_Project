@@ -37,6 +37,10 @@ const router: Router = createRouter({
           name: 'account',
           component: (): Promise<any> => import('@/views/AccountView'),
         },
+        {
+          path: '/dashboard',
+          component: () => import('@/views/dashboard/WelcomeView'),
+        },
       ],
     },
     {
