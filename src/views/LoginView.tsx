@@ -1,23 +1,56 @@
-import { defineComponent, ref, getCurrentInstance } from 'vue';
+import { defineComponent, ref, getCurrentInstance, onMounted } from 'vue';
 import { reactive } from 'vue';
 import type { Ref } from 'vue';
-import type { FormInstance } from 'element-plus';
+import type { FormInstance, Action } from 'element-plus';
+import { login, getImageCaptcha } from '@/api/login';
+import { ElMessage, ElMessageBox } from 'element-plus';
 
 import loginStyle from '@/assets/css/login.module.css';
 export default defineComponent({
   setup(): () => JSX.Element {
+    onMounted(async () => {
+      getimgUrl();
+    });
     const _this = (getCurrentInstance() as any).proxy;
-    console.log(_this);
+    // 表单数据
+    const ruleForm = reactive({
+      username: '',
+      password: '',
+      verifyCode: '',
+      captchaId: '',
+      checkPass: '',
+    });
     const ruleFormRef: any = ref();
-
+    // 验证码
+    const imgUrl: Ref<string> = ref('');
+    // 获取验证码
+    const getimgUrl: () => Promise<void> = async (): Promise<void> => {
+      let res = await getImageCaptcha({ width: 100, height: 50 });
+      ruleForm.captchaId = res.data.id;
+      imgUrl.value = res.data.img;
+      ElMessage.closeAll();
+    };
+    // 验证规则
     const validatePass = (rule: any, value: any, callback: any) => {
       if (value === '') {
         callback(new Error('密码不能为空'));
       } else {
-        if (checkPass.value !== '') {
-          if (!ruleFormRef.value) return;
-          ruleFormRef.value.validateField('checkPass', () => null);
-        }
+        callback();
+      }
+    };
+    const validateVerifyCode = (rule: any, value: any, callback: any) => {
+      if (value === '') {
+        callback(new Error('验证码不能为空'));
+      } else if (value.length > 4) {
+        callback(new Error('验证码只有四位'));
+      } else {
+        callback();
+      }
+    };
+    const validateUser = (rule: any, value: any, callback: any) => {
+      if (value === '') {
+        callback(new Error('用户名不能为空'));
+      } else {
         callback();
       }
     };
@@ -30,25 +63,34 @@ export default defineComponent({
         callback();
       }
     };
-    // 表单数据
-    const ruleForm = reactive({
-      username: '',
-      password: '',
-      verifyCode: '',
-    });
-    const checkPass: Ref<string> = ref('');
     // 验证规则
     const rules = reactive({
-      pass: [{ validator: validatePass, trigger: 'blur' }],
+      username: [{ validator: validateUser, trigger: 'blur' }],
+      password: [{ validator: validatePass, trigger: 'blur' }],
       checkPass: [{ validator: validatePass2, trigger: 'blur' }],
+      verifyCode: [{ validator: validateVerifyCode, trigger: 'change' }],
     });
     // 提交按钮
     const submitForm = (formEl: FormInstance | undefined) => {
-      console.log(formEl);
+      ElMessage.closeAll();
       if (!formEl) return;
-      formEl.validate((valid) => {
+      formEl.validate(async (valid): Promise<any> => {
         if (valid) {
-          console.log('submit!');
+          let res: any = await login({
+            username: ruleForm.username,
+            password: ruleForm.password,
+            verifyCode: ruleForm.verifyCode,
+            captchaId: ruleForm.captchaId,
+          });
+          res.code === 10002 &&
+            ElMessageBox.alert(res.message, '注意', {
+              confirmButtonText: 'OK',
+              callback: (action: Action) => {
+                ruleForm.verifyCode = '';
+                getimgUrl();
+              },
+            });
+          res.code === 200 && _this.$router.push('/');
         } else {
           console.log('error submit!');
           return false;
@@ -72,6 +114,9 @@ export default defineComponent({
       lineHeight: '460px',
       textAlign: 'center',
     };
+    /**
+     * jsx
+     */
     return (): JSX.Element => (
       <div
         style={{
@@ -84,9 +129,8 @@ export default defineComponent({
           {/* 登录框 */}
           <div class={loginStyle.loginContainer}>
             <div class={`${loginStyle.layout} loginLayout`}>
-              {/* 登录按钮 */}
               {/**
-               * 判断状态 渲染登录/注册
+               * 判断状态 渲染登录/注册按钮
                */}
               {type.value ? (
                 <el-button
@@ -144,6 +188,7 @@ export default defineComponent({
                 </el-button>
               )}
             </div>
+            {/* 登录狂 */}
             <div class={`${loginStyle.login} login`}>
               {/* form */}
               <el-form
@@ -154,31 +199,47 @@ export default defineComponent({
                 class="demo-ruleForm"
               >
                 <el-form-item label="用户名" prop="username">
-                  <el-input v-model={ruleForm.username} autocomplete="off" />
+                  <el-input
+                    v-model={ruleForm.username}
+                    autocomplete="off"
+                    placeholder="rootadmin"
+                  />
                 </el-form-item>
                 <el-form-item label="密码" prop="password">
                   <el-input
                     v-model={ruleForm.password}
                     type="password"
                     autocomplete="off"
+                    placeholder="123456"
                   />
                 </el-form-item>
                 <el-form-item label="确认密码" prop="checkPass">
                   <el-input
-                    v-model={checkPass.value}
+                    v-model={ruleForm.checkPass}
                     type="password"
                     autocomplete="off"
                   />
                 </el-form-item>
                 {/* 验证码 */}
-                <el-col span={16}>
-                  <el-form-item label="验证码" prop="verifyCode">
-                    <el-input
-                      v-model={ruleForm.verifyCode}
-                      autocomplete="off"
+                <el-row>
+                  <el-col span={15}>
+                    <el-form-item label="验证码" prop="verifyCode">
+                      <el-input
+                        v-model={ruleForm.verifyCode}
+                        autocomplete="off"
+                      />
+                    </el-form-item>
+                  </el-col>
+                  <el-col span={4}>
+                    {/* 验证码图片 */}
+                    <el-image
+                      style="width: 100px; height: 50px; display: block; position: relative; top:-10px; left:10px; background-color:#fff; border-radius:10px; cursor:pointer"
+                      src={imgUrl.value}
+                      onClick={getimgUrl}
+                      title="看不清？更换验证码"
                     />
-                  </el-form-item>
-                </el-col>
+                  </el-col>
+                </el-row>
 
                 <el-form-item>
                   <el-button
