@@ -1,0 +1,47 @@
+.loginBox {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loginContainer {
+  overflow: hidden;
+  display: flex;
+  border-radius: 70px;
+  box-shadow: 0 0 10px 3px rgba(255, 255, 255, 1);
+}
+.layout {
+  width: 400px;
+  height: 500px;
+  backdrop-filter: blur(6px);
+  background-image: url('@/assets/images/login_bg2.jpg');
+  background-size: cover;
+  background-position: top 0px left -40px;
+  box-shadow: 0 0 10px 3px rgba(255, 255, 255, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 1s;
+  position: relative;
+  left: 0;
+  z-index: 1;
+}
+.login {
+  width: 400px;
+  height: 500px;
+  backdrop-filter: blur(6px);
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px 3px rgba(255, 255, 255, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 1s;
+  position: relative;
+  left: 0;
+}
+.bg {
+  background-image: url('@/assets/images/login_bg.jpg');
+}
