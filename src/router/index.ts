@@ -55,17 +55,18 @@ const router: Router = createRouter({
 });
 // 前置守卫
 const isLogin: () => boolean = (): boolean => !!localStorage.getItem('token');
-// router.beforeEach((to: RouteLocationNormalized): any => {
-//   if (to.path === '/login') {
-//     if (isLogin() as boolean) {
-//       ElMessage('登录状态有效，不需要重复登录了');
-//       return { name: 'home' };
-//     }
-//   } else if (to.path != 'login') {
-//     if (!isLogin() as boolean) {
-//       return { name: 'login' };
-//     }
-//   }
-// });
+router.beforeEach((to: RouteLocationNormalized): any => {
+  if (to.path === '/login') {
+    if (isLogin() as boolean) {
+      ElMessage('登录状态有效，不需要重复登录了');
+      return { name: 'home' };
+    }
+  } else if (to.path != 'login') {
+    if (!isLogin() as boolean) {
+      ElMessage.error('请先登录');
+      return { name: 'login' };
+    }
+  }
+});
 
 export default router;
