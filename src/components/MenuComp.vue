@@ -6,7 +6,7 @@
   >
     <h2 class="title">
       <el-avatar shape="square" :size="50" :src="heizi" />
-      XX后台管理
+      iKun后台管理
     </h2>
     <!-- 一级 系统-->
     <!-- 二级权限 -->

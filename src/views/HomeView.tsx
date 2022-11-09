@@ -1,6 +1,7 @@
 import { defineComponent } from 'vue';
 import homeStyle from '@/assets/sass/home.module.sass';
 import MenuComp from '@/components/MenuComp.vue';
+import HeaderComp from '@/components/HeaderComp.vue';
 export default defineComponent({
   setup(): () => JSX.Element {
     return (): JSX.Element => (
@@ -10,7 +11,9 @@ export default defineComponent({
             <MenuComp />
           </el-aside>
           <el-container>
-            <el-header class={homeStyle.header}>Header</el-header>
+            <el-header class={homeStyle.header}>
+              <HeaderComp />
+            </el-header>
             <el-main class={homeStyle.main}>
               <router-view></router-view>
             </el-main>
