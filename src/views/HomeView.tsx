@@ -8,14 +8,18 @@ export default defineComponent({
       <>
         <el-container class={homeStyle.elContainer}>
           <el-aside width="200px">
-            <MenuComp />
+            <el-scrollbar>
+              <MenuComp style={{ height: '100%' }} />
+            </el-scrollbar>
           </el-aside>
           <el-container>
             <el-header class={homeStyle.header}>
               <HeaderComp />
             </el-header>
             <el-main class={homeStyle.main}>
-              <router-view></router-view>
+              <el-scrollbar>
+                <router-view></router-view>
+              </el-scrollbar>
             </el-main>
           </el-container>
         </el-container>
