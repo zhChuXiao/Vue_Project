@@ -1,16 +1,14 @@
 <template>
   <el-breadcrumb :separator-icon="ArrowRight">
     <el-breadcrumb-item :to="item.path" v-for="item in list" :key="item.path">{{
-      item.title
+        item.title
     }}</el-breadcrumb-item>
   </el-breadcrumb>
   <el-space>
     <el-dropdown>
-      <el-tag class="ml-2" type="success" effect="dark"
-        >昵称：{{ store.state.user.userInfo.name }}</el-tag
-      >
+      <el-tag class="ml-2" type="success" effect="dark">昵称：{{ store.state?.user?.userInfo?.name }}</el-tag>
     </el-dropdown>
-    <el-avatar :size="40" :src="store.state.user.userInfo.headImg" />
+    <el-avatar :size="40" :src="store?.state?.user?.userInfo?.headImg || heizi" />
   </el-space>
 </template>
 
@@ -20,6 +18,7 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { routes } from '@/router';
 import { useStore } from 'vuex';
+import heizi from '@/assets/images/heizi.jpg'
 const route = useRoute();
 const store = useStore();
 // 面包屑
