@@ -6,3 +6,10 @@ export function getOnlineList() {
     method: 'get'
   })
 }
+export function kickOnlineUser(data) {
+  return request({
+    url:'admin/sys/online/kick',
+    method: 'post',
+    data
+  })
+}
