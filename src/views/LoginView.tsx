@@ -2,18 +2,19 @@ import { defineComponent, ref, getCurrentInstance, onMounted } from 'vue';
 import { reactive } from 'vue';
 import { login, getImageCaptcha } from '@/api/login';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { useStore } from 'vuex';
 // 类型
 import type { Ref } from 'vue';
 import type { FormInstance, Action } from 'element-plus';
 import type { AxiosResponse } from 'axios';
-
+// css 模块化
 import loginStyle from '@/assets/css/login.module.css';
 export default defineComponent({
   setup(): () => JSX.Element {
     onMounted(async () => {
       getimgUrl();
-      console.log(ruleFormRef);
     });
+    const store = useStore();
     const _this = (getCurrentInstance() as any).proxy;
     // 表单数据
     interface Rule {
@@ -98,6 +99,7 @@ export default defineComponent({
             verifyCode: ruleForm.verifyCode,
             captchaId: ruleForm.captchaId,
           });
+
           res.code === 10002 &&
             ElMessageBox.alert(res.message, '注意', {
               confirmButtonText: 'OK',
@@ -106,7 +108,7 @@ export default defineComponent({
                 getimgUrl();
               },
             });
-          res.code === 200 && _this.$router.push('/');
+          res.code === 200 && store.dispatch('AccountInfo'), _this.$router.push('/');
         } else {
           console.log('error submit!');
           return false;
