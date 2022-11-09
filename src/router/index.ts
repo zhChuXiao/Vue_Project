@@ -47,17 +47,10 @@ const router: Router = createRouter({
         },
         // 系统监控
         {
-          path: '/system',
-          name: 'system',
-          redirect:'/system/online',
-          children:[
-            {
-              path:'/system/online',
-              name:'online',
-              component:():Promise<any> => import('@/views/OnlineView.vue')
-            }
-          ]
-        },
+          path:'/online',
+          name:'online',
+          component:():Promise<any> => import('@/views/OnlineView.vue')
+        }
       ],
     },
     
