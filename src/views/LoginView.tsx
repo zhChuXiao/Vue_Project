@@ -71,7 +71,9 @@ export default defineComponent({
       verifyCode: [{ validator: validateVerifyCode, trigger: 'change' }],
     });
     // 提交按钮
-    const submitForm = (formEl: FormInstance | undefined) => {
+    const submitForm: (formEl: FormInstance | undefined) => void = (
+      formEl: FormInstance | undefined,
+    ): void => {
       ElMessage.closeAll();
       if (!formEl) return;
       formEl.validate(async (valid): Promise<any> => {
