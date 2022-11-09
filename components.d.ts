@@ -36,5 +36,6 @@ declare module '@vue/runtime-core' {
     MenuComp: typeof import('./src/components/MenuComp.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TransitionComp: typeof import('./src/components/TransitionComp.vue')['default']
   }
 }
