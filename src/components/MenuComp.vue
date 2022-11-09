@@ -1,9 +1,5 @@
 <template>
-  <el-menu
-    default-active="2"
-    class="el-menu-vertical-demo"
-    @select="handleSelect"
-  >
+  <el-menu default-active="2" class="el-menu-vertical-demo" @select="handleSelect">
     <h2 class="title">
       <el-avatar shape="square" :size="50" :src="heizi" />
       XX后台管理
@@ -118,6 +114,8 @@ const handleSelect = (index: string, indexPath: any, routeResult: any) => {
       display: flex
       align-items: center
       justify-content: space-between
-      padding: 5px
+      padding: 10px
       color: deepskyblue
+      margin: 0
+      font-size: 20px
 </style>
