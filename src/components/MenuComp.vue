@@ -94,19 +94,14 @@ import {
   Mug,
 } from '@element-plus/icons-vue';
 import heizi from '@/assets/images/heizi.jpg';
-import { useRouter } from 'vue-router';
-const router = useRouter();
-// const handleOpen = (key: string, keyPath: string[]) => {
-//   console.log(key, keyPath);
-// };
-// const handleClose = (key: string, keyPath: string[]) => {
-//   console.log(key, keyPath);
-// };
+import { useRouter, type Router } from 'vue-router';
+const router: Router = useRouter();
+
 // 选择的菜单
 const handleSelect = (index: string, indexPath: any, routeResult: any) => {
   // console.log(index, indexPath, routeResult);
   console.log(indexPath.join(''));
-  router.push({ path: indexPath.join('') });
+  // router.push({ path: indexPath.join('') });
 };
 </script>
 
