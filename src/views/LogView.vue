@@ -1,11 +1,15 @@
 <template>
-  <div>日志</div>
+<div>log</div>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import {defineComponent} from 'vue'
 
-export default defineComponent({});
+export default defineComponent({
+
+})
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

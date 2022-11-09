@@ -1,10 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { ElMessage } from 'element-plus';
-import type {
-  Router,
-  RouteLocationNormalized,
-  NavigationGuardNext,
-} from 'vue-router';
+import type { Router, RouteLocationNormalized } from 'vue-router';
 const router: Router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -13,36 +9,98 @@ const router: Router = createRouter({
       name: 'home',
       component: (): Promise<any> => import('@/views/HomeView'),
       children: [
+        // 权限管理
         {
-          path: 'admin',
-          component: (): Promise<any> => import('@/views/AdminView.vue'),
+          path: 'permssion',
+          component: (): Promise<any> => import('@/views/PermssionView'),
+          redirect: '/permssion/user',
+          meta: {
+            title: '权限管理',
+          },
+          children: [
+            {
+              path: 'user',
+              component: (): Promise<any> => import('@/views/UserView.vue'),
+              meta: {
+                title: '用户列表',
+              },
+            },
+            {
+              path: 'menu',
+              component: (): Promise<any> => import('@/views/MenuView.vue'),
+              meta: {
+                title: '菜单列表',
+              },
+            },
+            {
+              path: 'role',
+              component: (): Promise<any> => import('@/views/RoleView.vue'),
+              meta: {
+                title: '角色列表',
+              },
+            },
+          ],
         },
+        // 系统监控
         {
-          path: '/log',
-          name: 'log',
-          component: (): Promise<any> => import('@/views/LogView.vue'),
+          path: 'system',
+          component: (): Promise<any> => import('@/views/SystemView'),
+          redirect: '/system/online',
+          meta: {
+            title: '系统监控',
+          },
+          children: [
+            {
+              path: 'online',
+              component: (): Promise<any> => import('@/views/OnlineView.vue'),
+              meta: {
+                title: '在线用户',
+              },
+            },
+            {
+              path: 'login-log',
+              component: (): Promise<any> => import('@/views/LoginlogView.vue'),
+              meta: {
+                title: '登录日志',
+              },
+            },
+            {
+              path: 'role',
+              component: (): Promise<any> => import('@/views/RoleView.vue'),
+              meta: {
+                title: '服务监控',
+              },
+            },
+          ],
         },
+        // 任务调度
         {
-          path: '/menu',
-          name: 'menu',
-          component: (): Promise<any> => import('@/views/MenuView.vue'),
-        },
-        {
-          path: '/role',
-          name: 'role',
-          component: (): Promise<any> => import('@/views/RoleView.vue'),
-        },
-        {
-          path: '/account',
-          name: 'account',
-          component: (): Promise<any> => import('@/views/AccountView'),
-        },
-        {
-          path: '/dashboard',
-          component: () => import('@/views/dashboard/WelcomeView'),
+          path: 'schedule',
+          component: (): Promise<any> => import('@/views/ScheduleView'),
+          redirect: '/schedule/task',
+          meta: {
+            title: '任务调度',
+          },
+          children: [
+            {
+              path: 'task',
+              component: (): Promise<any> => import('@/views/TaskView.vue'),
+              meta: {
+                title: '定时任务',
+              },
+            },
+            {
+              path: 'log',
+              component: (): Promise<any> => import('@/views/ScheduleLogView.vue'),
+              meta: {
+                title: '任务日志',
+              },
+            },
+          ],
         },
       ],
     },
+
     {
       path: '/login',
       name: 'login',

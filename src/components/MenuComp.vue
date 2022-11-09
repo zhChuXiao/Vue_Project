@@ -1,9 +1,5 @@
 <template>
-  <el-menu
-    default-active="2"
-    class="el-menu-vertical-demo"
-    @select="handleSelect"
-  >
+  <el-menu default-active="2" class="el-menu-vertical-demo" @select="handleSelect">
     <h2 class="title">
       <el-avatar shape="square" :size="50" :src="heizi" />
       XX后台管理
@@ -36,7 +32,7 @@
       </el-menu-item>
     </el-sub-menu>
     <!-- 二级系统监控 -->
-    <el-sub-menu index="/monitor">
+    <el-sub-menu index="/system">
       <template #title>
         <el-icon><Monitor /></el-icon>
         <span>系统监控</span>
@@ -45,13 +41,13 @@
       <el-menu-item index="/online">
         <template #title>
           <el-icon><Avatar /></el-icon>
-          <span>在线用户</span>
+          <span @click="$router.push({ name: 'online' })">在线用户</span>
         </template>
       </el-menu-item>
       <el-menu-item index="/login-log">
         <template #title>
           <el-icon><Histogram /></el-icon>
-          <span>登录日志</span>
+          <span @click="$router.push({name:'login-log'})">登录日志</span>
         </template>
       </el-menu-item>
       <el-menu-item index="/serve">
@@ -77,7 +73,6 @@
       <el-menu-item index="/log">
         <template #title>
           <el-icon><Tickets /></el-icon>
-          <span>任务日志</span>
         </template>
       </el-menu-item>
     </el-sub-menu>
@@ -98,16 +93,14 @@ import {
   Mug,
 } from '@element-plus/icons-vue';
 import heizi from '@/assets/images/heizi.jpg';
-// const handleOpen = (key: string, keyPath: string[]) => {
-//   console.log(key, keyPath);
-// };
-// const handleClose = (key: string, keyPath: string[]) => {
-//   console.log(key, keyPath);
-// };
+import { useRouter, type Router } from 'vue-router';
+const router: Router = useRouter();
+
 // 选择的菜单
 const handleSelect = (index: string, indexPath: any, routeResult: any) => {
   // console.log(index, indexPath, routeResult);
   console.log(indexPath.join(''));
+  router.push({ path: indexPath.join('') });
 };
 </script>
 
@@ -118,6 +111,8 @@ const handleSelect = (index: string, indexPath: any, routeResult: any) => {
       display: flex
       align-items: center
       justify-content: space-between
-      padding: 5px
+      padding: 10px
       color: deepskyblue
+      margin: 0
+      font-size: 20px
 </style>
