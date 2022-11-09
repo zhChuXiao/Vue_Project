@@ -8,11 +8,13 @@ import type {
 const router: Router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // 权限管理
     {
       path: '/',
       name: 'home',
       component: (): Promise<any> => import('@/views/HomeView'),
       children: [
+        // 用户列表
         {
           path: 'admin',
           component: (): Promise<any> => import('@/views/AdminView.vue'),
@@ -22,11 +24,13 @@ const router: Router = createRouter({
           name: 'log',
           component: (): Promise<any> => import('@/views/LogView.vue'),
         },
+        // 菜单列表
         {
           path: '/menu',
           name: 'menu',
           component: (): Promise<any> => import('@/views/MenuView.vue'),
         },
+        // 角色列表
         {
           path: '/role',
           name: 'role',
@@ -41,8 +45,15 @@ const router: Router = createRouter({
           path: '/dashboard',
           component: () => import('@/views/dashboard/WelcomeView'),
         },
+        // 系统监控
+        {
+          path:'/online',
+          name:'online',
+          component:():Promise<any> => import('@/views/OnlineView.vue')
+        }
       ],
     },
+    
     {
       path: '/login',
       name: 'login',

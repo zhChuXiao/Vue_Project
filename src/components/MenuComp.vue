@@ -41,7 +41,7 @@
       <el-menu-item index="/online">
         <template #title>
           <el-icon><Avatar /></el-icon>
-          <span>在线用户</span>
+          <span @click="$router.push({name:'online'})">在线用户</span>
         </template>
       </el-menu-item>
       <el-menu-item index="/login-log">
