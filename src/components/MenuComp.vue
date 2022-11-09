@@ -101,7 +101,7 @@ const router: Router = useRouter();
 const handleSelect = (index: string, indexPath: any, routeResult: any) => {
   // console.log(index, indexPath, routeResult);
   console.log(indexPath.join(''));
-  // router.push({ path: indexPath.join('') });
+  router.push({ path: indexPath.join('') });
 };
 </script>
 
