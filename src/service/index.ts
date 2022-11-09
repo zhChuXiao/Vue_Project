@@ -15,7 +15,7 @@ request.interceptors.request.use(
     let token: string | null = localStorage.getItem('token');
     (token as string) &&
       (config as AxiosRequestConfig<any>) &&
-      ((config.headers as Partial<any>).token = token);
+      ((config.headers as Partial<any>).authorization = token);
     return config;
   },
 );

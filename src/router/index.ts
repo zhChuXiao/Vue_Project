@@ -59,7 +59,7 @@ const router: Router = createRouter({
             },
             {
               path: 'login-log',
-              component: (): Promise<any> => import('@/views/LogView.vue'),
+              component: (): Promise<any> => import('@/views/LoginlogView.vue'),
               meta: {
                 title: '登录日志',
               },

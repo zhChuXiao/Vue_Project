@@ -8,10 +8,7 @@ const messages = {
   // 中文
   zh,
 };
-/**
- * 获取
- * @returns {string}
- */
+
 function getLocal() {
   // 如果缓存中存在，则直接返回
   const myLocale = localStorage.getItem('my_locale');

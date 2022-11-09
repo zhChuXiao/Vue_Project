@@ -1,31 +1,45 @@
 import { defineComponent, ref, getCurrentInstance, onMounted } from 'vue';
 import { reactive } from 'vue';
-import type { Ref } from 'vue';
-import type { FormInstance, Action } from 'element-plus';
 import { login, getImageCaptcha } from '@/api/login';
 import { ElMessage, ElMessageBox } from 'element-plus';
+// 类型
+import type { Ref } from 'vue';
+import type { FormInstance, Action } from 'element-plus';
+import type { AxiosResponse } from 'axios';
 
 import loginStyle from '@/assets/css/login.module.css';
 export default defineComponent({
   setup(): () => JSX.Element {
     onMounted(async () => {
       getimgUrl();
+      console.log(ruleFormRef);
     });
     const _this = (getCurrentInstance() as any).proxy;
     // 表单数据
-    const ruleForm = reactive({
+    interface Rule {
+      username: string;
+      password: string;
+      verifyCode: string;
+      captchaId: string;
+      checkPass: string;
+    }
+    const ruleForm: Rule = reactive<Rule>({
       username: '',
       password: '',
       verifyCode: '',
       captchaId: '',
       checkPass: '',
     });
-    const ruleFormRef: any = ref();
+    // 表单
+    const ruleFormRef: Ref<FormInstance | null> = ref<FormInstance | null>(null);
     // 验证码
     const imgUrl: Ref<string> = ref('');
     // 获取验证码
     const getimgUrl: () => Promise<void> = async (): Promise<void> => {
-      let res = await getImageCaptcha({ width: 100, height: 50 });
+      let res: AxiosResponse<any, any> = await getImageCaptcha({
+        width: 100,
+        height: 50,
+      });
       ruleForm.captchaId = res.data.id;
       imgUrl.value = res.data.img;
       ElMessage.closeAll();
@@ -226,10 +240,7 @@ export default defineComponent({
                 <el-row>
                   <el-col span={15}>
                     <el-form-item label="验证码" prop="verifyCode">
-                      <el-input
-                        v-model={ruleForm.verifyCode}
-                        autocomplete="off"
-                      />
+                      <el-input v-model={ruleForm.verifyCode} autocomplete="off" />
                     </el-form-item>
                   </el-col>
                   <el-col span={4}>
@@ -246,12 +257,12 @@ export default defineComponent({
                 <el-form-item>
                   <el-button
                     type="primary"
-                    onClick={() => submitForm(ruleFormRef._rawValue as any)}
+                    onClick={() => submitForm((ruleFormRef as any)._rawValue as any)}
                   >
                     提交
                   </el-button>
                   <el-button
-                    onClick={() => resetForm(ruleFormRef?._rawValue as any)}
+                    onClick={() => resetForm((ruleFormRef as any)._rawValue as any)}
                   >
                     重置
                   </el-button>
