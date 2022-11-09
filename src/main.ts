@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import vm from './App';
 import router from './router';
 import type { App } from 'vue';
+import store from '@/store';
 // element-plus样式
 import 'element-plus/dist/index.css';
 import ElementPlus from 'element-plus';
@@ -25,7 +26,8 @@ app
   .use(ElementPlus, {
     locale: zhCn,
   })
-  .use(i18n);
+  .use(i18n)
+  .use(store);
 
 app.mount('#app');
 export default app;

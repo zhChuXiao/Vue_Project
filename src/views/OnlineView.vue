@@ -46,6 +46,7 @@
 </template>
 
 <script lang="ts" setup>
+<<<<<<< HEAD
 import { ref,reactive,onMounted } from 'vue'
 import type {FormInstance} from 'element-plus'
 import {getOnlineList} from '@/api/online.js'
@@ -139,3 +140,16 @@ const tableData = [
   }
 }
 </style>
+=======
+import { reactive } from 'vue';
+
+const formInline = reactive({
+  user: '',
+  region: '',
+});
+
+const onSubmit = () => {
+  console.log('submit!');
+};
+</script>
+>>>>>>> ce89ecea3bdfd7cb416ea44030976181d2755217

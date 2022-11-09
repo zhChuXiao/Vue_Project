@@ -24,9 +24,8 @@ request.interceptors.response.use(
   (
     response: AxiosResponse<any, any>,
   ): AxiosResponse<any, any> | Promise<AxiosResponse<any, any>> => {
-    console.log('res--->', response),
-      (response.data?.data?.token as boolean) &&
-        localStorage.setItem('token', response.data.data.token);
+    (response.data?.data?.token as boolean) &&
+      localStorage.setItem('token', response.data.data.token);
 
     // 全局的弹窗
     ElMessage({

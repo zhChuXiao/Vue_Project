@@ -5,9 +5,7 @@ import type { AxiosResponse } from 'axios';
  * @param {data} data 验证码宽高
  * @returns
  */
-export const getImageCaptcha: (
-  data: any,
-) => Promise<AxiosResponse<any, any>> = (
+export const getImageCaptcha: (data: any) => Promise<AxiosResponse<any, any>> = (
   data: any,
 ): Promise<AxiosResponse<any, any>> => {
   return request({
@@ -28,5 +26,17 @@ export const login: (data: any) => Promise<AxiosResponse<any, any>> = (
     url: '/admin/login',
     method: 'post',
     data,
+  });
+};
+/**
+ * @description 获管理员信息
+ * @returns
+ */
+export const getAccountInfo: () => Promise<AxiosResponse<any, any>> = (): Promise<
+  AxiosResponse<any, any>
+> => {
+  return request({
+    url: '/admin/account/info',
+    method: 'get',
   });
 };
