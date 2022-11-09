@@ -11,8 +11,7 @@ export default defineComponent({
           </el-aside>
           <el-container>
             <el-header class={homeStyle.header}>Header</el-header>
-            <el-main>
-              main
+            <el-main class={homeStyle.main}>
               <router-view></router-view>
             </el-main>
           </el-container>

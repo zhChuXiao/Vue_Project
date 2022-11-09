@@ -7,7 +7,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    DemoComp: typeof import('./src/components/DemoComp.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElMenu: typeof import('element-plus/es')['ElMenu']
