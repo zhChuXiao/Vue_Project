@@ -39,7 +39,7 @@
     <el-sub-menu index="/monitor">
       <template #title>
         <el-icon><Monitor /></el-icon>
-        <span @click="$router.push({name:'system'})">系统监控</span>
+        <span>系统监控</span>
       </template>
       <!-- 三级 -->
       <el-menu-item index="/online">
