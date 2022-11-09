@@ -32,7 +32,7 @@
       </el-menu-item>
     </el-sub-menu>
     <!-- 二级系统监控 -->
-    <el-sub-menu index="/monitor">
+    <el-sub-menu index="/system">
       <template #title>
         <el-icon><Monitor /></el-icon>
         <span>系统监控</span>
@@ -41,7 +41,7 @@
       <el-menu-item index="/online">
         <template #title>
           <el-icon><Avatar /></el-icon>
-          <span @click="$router.push({name:'online'})">在线用户</span>
+          <span @click="$router.push({ name: 'online' })">在线用户</span>
         </template>
       </el-menu-item>
       <el-menu-item index="/login-log">
