@@ -1,14 +1,15 @@
 <template>
-<div>123</div>
+<div class="serch">123</div>
 </template>
 
-<script>
-import {defineComponent} from 'vue'
+<script setup lang="ts">
 
-export default defineComponent({
-})
 </script>
 
 <style lang="scss" scoped>
-
+.serch {
+  width: 100%;
+  height: 136px;
+  background: #fff;
+}
 </style>
