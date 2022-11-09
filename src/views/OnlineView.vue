@@ -91,7 +91,6 @@ onMounted(async () => {
 //     return formInline.some()
 //   })
 // })
-
 const confirmEvent = (row) => {
   kickOnlineUser({
     "id": row.id
