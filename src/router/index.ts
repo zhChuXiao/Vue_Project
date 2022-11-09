@@ -45,7 +45,7 @@ const router: Router = createRouter({
           path: '/dashboard',
           component: () => import('@/views/dashboard/WelcomeView'),
         },
-        // 系统监控
+        // 在线用户
         {
           path:'/online',
           name:'online',
