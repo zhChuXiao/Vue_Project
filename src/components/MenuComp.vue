@@ -1,8 +1,13 @@
 <template>
-  <el-menu default-active="2" class="el-menu-vertical-demo" @select="handleSelect">
+  <el-menu
+    :default-active="`/${route.path.split('/')[route.path.split('/').length - 1]}`"
+    class="el-menu-vertical-demo"
+    :default-openeds="['/permssion', '/system', '/schedule']"
+    @select="handleSelect"
+  >
     <h2 class="title">
       <el-avatar shape="square" :size="50" :src="heizi" />
-      XX后台管理
+      iKun后台管理
     </h2>
     <!-- 一级 系统-->
     <!-- 二级权限 -->
@@ -41,13 +46,13 @@
       <el-menu-item index="/online">
         <template #title>
           <el-icon><Avatar /></el-icon>
-          <span @click="$router.push({ name: 'online' })">在线用户</span>
+          <span>在线用户</span>
         </template>
       </el-menu-item>
       <el-menu-item index="/login-log">
         <template #title>
           <el-icon><Histogram /></el-icon>
-          <span @click="$router.push({name:'login-log'})">登录日志</span>
+          <span>登录日志</span>
         </template>
       </el-menu-item>
       <el-menu-item index="/serve">
@@ -73,6 +78,7 @@
       <el-menu-item index="/log">
         <template #title>
           <el-icon><Tickets /></el-icon>
+          <span>任务日志</span>
         </template>
       </el-menu-item>
     </el-sub-menu>
@@ -93,8 +99,10 @@ import {
   Mug,
 } from '@element-plus/icons-vue';
 import heizi from '@/assets/images/heizi.jpg';
-import { useRouter, type Router } from 'vue-router';
+import { useRouter, type Router, useRoute } from 'vue-router';
+// import { useStore } from 'vuex';
 const router: Router = useRouter();
+const route = useRoute();
 
 // 选择的菜单
 const handleSelect = (index: string, indexPath: any, routeResult: any) => {
