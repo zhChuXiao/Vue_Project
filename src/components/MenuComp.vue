@@ -2,6 +2,7 @@
   <el-menu
     :default-active="`/${route.path.split('/')[route.path.split('/').length - 1]}`"
     class="el-menu-vertical-demo"
+    :default-openeds="['/permssion', '/system', '/schedule']"
     @select="handleSelect"
   >
     <h2 class="title">
@@ -77,6 +78,7 @@
       <el-menu-item index="/log">
         <template #title>
           <el-icon><Tickets /></el-icon>
+          <span>任务日志</span>
         </template>
       </el-menu-item>
     </el-sub-menu>
