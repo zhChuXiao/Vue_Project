@@ -51,7 +51,7 @@
       <el-menu-item index="/login-log">
         <template #title>
           <el-icon><Histogram /></el-icon>
-          <span>登录日志</span>
+          <span @click="$router.push({name:'login-log'})">登录日志</span>
         </template>
       </el-menu-item>
       <el-menu-item index="/serve">
@@ -77,7 +77,6 @@
       <el-menu-item index="/log">
         <template #title>
           <el-icon><Tickets /></el-icon>
-          <span>任务日志</span>
         </template>
       </el-menu-item>
     </el-sub-menu>
