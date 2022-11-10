@@ -36,3 +36,16 @@ export const getRoleList: () => Promise<AxiosResponse<any, any>> = (): Promise<
     method: 'get',
   });
 };
+/**
+ * @description 添加管理员
+ * @param {data} data
+ */
+export const addAdmin: (data: any) => Promise<AxiosResponse<any, any>> = (
+  data: any,
+): Promise<AxiosResponse<any, any>> => {
+  return request({
+    url: '/admin/sys/user/add',
+    method: 'post',
+    data,
+  });
+};

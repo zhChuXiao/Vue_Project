@@ -7,6 +7,7 @@ export const routes: readonly RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
+    redirect: '/permssion/user',
     component: (): Promise<any> => import('@/views/HomeView'),
     meta: {
       title: '首页',
