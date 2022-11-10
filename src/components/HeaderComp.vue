@@ -5,6 +5,25 @@
     }}</el-breadcrumb-item>
   </el-breadcrumb>
   <el-space>
+    <el-tooltip
+      :content="`切换${theme ? '日间' : '夜间'}主题`"
+      placement="bottom"
+      effect="dark"
+    >
+      <el-switch
+        v-model="theme"
+        class="mt-2"
+        inline-prompt
+        :active-icon="Sunny"
+        :inactive-icon="MoonNight"
+        style="
+          margin-left: 24px;
+          --el-switch-on-color: #000;
+          --el-switch-off-color: #999;
+          --el-switch-border-color: #777;
+        "
+      />
+    </el-tooltip>
     <el-tag class="ml-2" type="success" effect="dark"
       >昵称：{{ store.state?.user?.userInfo?.name }}</el-tag
     >
@@ -37,7 +56,7 @@
     close-on-press-escape
     center
   >
-    <div style="color: red; text-align: center; font-size: 16px">确定要退出吗??????</div>
+    <div style="color: red; text-align: center; font-size: 16px">确定要退出吗？</div>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogVisible = false">取消</el-button>
@@ -48,8 +67,9 @@
 </template>
 
 <script lang="ts" setup>
+import { Sunny, MoonNight } from '@element-plus/icons-vue';
 import { ArrowRight } from '@element-plus/icons-vue';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { routes } from '@/router';
 import { useStore } from 'vuex';
@@ -73,6 +93,15 @@ const setMap = (routes: any) => {
     }
   });
 };
+// 切换主题
+const theme = ref(false);
+watch(theme, () => {
+  if (theme.value) {
+    document.documentElement.className = 'dark';
+  } else {
+    document.documentElement.className = 'light';
+  }
+});
 setMap(routes);
 const list = computed(() => {
   return route.matched.map((item) => ({ title: item.meta.title, path: item.path }));

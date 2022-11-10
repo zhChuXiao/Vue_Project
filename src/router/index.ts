@@ -106,7 +106,7 @@ export const routes: readonly RouteRecordRaw[] = [
           {
             path: 'log',
             name: 'log',
-            component: (): Promise<any> => import('@/views/ScheduleLogView.vue'),
+            component: (): Promise<any> => import('@/views/LogView.vue'),
             meta: {
               title: '任务日志',
             },

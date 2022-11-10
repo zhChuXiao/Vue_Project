@@ -5,6 +5,7 @@ import type { App } from 'vue';
 import store from '@/store';
 // element-plus样式
 import 'element-plus/dist/index.css';
+import 'element-plus/theme-chalk/dark/css-vars.css';
 import ElementPlus from 'element-plus';
 // 中文
 import zhCn from './locale/zh';

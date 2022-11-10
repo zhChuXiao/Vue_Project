@@ -7,7 +7,7 @@
   >
     <h2 class="title">
       <el-avatar shape="square" :size="50" :src="heizi" />
-      iKun后台管理
+      后台管理系统
     </h2>
     <!-- 一级 系统-->
     <!-- 二级权限 -->
@@ -113,14 +113,14 @@ const handleSelect = (index: string, indexPath: any, routeResult: any) => {
 </script>
 
 <style lang="sass" scoped>
-.el-menu
-    height: 100%
-    .title
-      display: flex
-      align-items: center
-      justify-content: space-between
-      padding: 10px
-      color: deepskyblue
-      margin: 0
-      font-size: 20px
+.el-menu-vertical-demo
+  height: 100vh
+  .title
+    display: flex
+    align-items: center
+    justify-content: space-between
+    padding: 10px
+    color: deepskyblue
+    margin: 0
+    font-size: 20px
 </style>

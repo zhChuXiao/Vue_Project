@@ -70,7 +70,6 @@
           ref="multipleTableRef"
           @selection-change="handleSelectionChange"
           stripe
-          :header-cell-style="{ background: '#eee' }"
           :cell-style="{ height: '70px' }"
           max-height="500"
         >
@@ -482,7 +481,7 @@ const defaultProps = {
 
 .el-container
   height: 100%
-  background: #fff
+  // background: #fff
   padding: 20px
   border-radius: 10px
   .el-aside
