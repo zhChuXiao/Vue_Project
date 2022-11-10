@@ -20,9 +20,9 @@
 
 ## 项目目录
 
-`src/api` azios 请求接口
+`src/api` axios 请求接口
 
-`src/assets` 静态资源 css/images
+`src/assets` 静态资源 
 
 `src/components` 组件
 
@@ -37,6 +37,8 @@
 `src/service` axios 配置
 
 `src/store` vuex 仓库
+
+`src/utils` 工具
 
 `src/views` 路由组件
 
