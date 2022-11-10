@@ -25,3 +25,14 @@ export const getUserPage: (data: any) => Promise<AxiosResponse<any, any>> = (
     data,
   });
 };
+/**
+ * @description 获取角色列表
+ */
+export const getRoleList: () => Promise<AxiosResponse<any, any>> = (): Promise<
+  AxiosResponse<any, any>
+> => {
+  return request({
+    url: '/admin/sys/role/list',
+    method: 'get',
+  });
+};

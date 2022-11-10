@@ -32,7 +32,7 @@
         <el-space class="manager">
           <div>用户管理</div>
           <div>
-            <el-button type="primary">
+            <el-button type="primary" @click="addUser">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-jiajianzujianjiahao"></use>
               </svg>
@@ -102,15 +102,101 @@
         </el-table>
       </el-main>
     </el-container>
+    <!-- 添加对话框 -->
+    <el-dialog
+      v-model="dialog.dialogAdd"
+      :fullscreen="fullscreen"
+      :modal="true"
+      :show-close="false"
+    >
+      <!-- 增加用户title -->
+      <template #header>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 20px;
+          "
+        >
+          <span>新增用户</span>
+          <!-- 全屏 -->
+          <div>
+            <svg
+              class="icon"
+              aria-hidden="true"
+              style="cursor: pointer; margin-right: 15px"
+              @click="fullscreen = !fullscreen"
+            >
+              <use xlink:href="#icon-full-screen"></use>
+            </svg>
+            <!-- 关闭 -->
+            <svg
+              class="icon"
+              aria-hidden="true"
+              style="cursor: pointer"
+              @click="dialog.dialogAdd = false"
+            >
+              <use xlink:href="#icon-guanbi"></use>
+            </svg>
+          </div>
+        </div>
+      </template>
+      <!-- 增加用户表单 -->
+      <el-form :model="addData" label-width="70" ref="ruleFormRef">
+        <el-form-item label="所属角色" prop="name">
+          <!-- 角色 -->
+          <el-select
+            v-model="addData.roles"
+            multiple
+            placeholder="请选择所属角色"
+            clearable
+            collapse-tags-tooltip
+            fit-input-width
+            validate-event
+          >
+            <el-option
+              v-for="item in selectData"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="addData.username" placeholder="请输入用户名" />
+        </el-form-item>
+        <el-space>
+          <el-form-item label="姓名" prop="name" class="shortItem">
+            <el-input v-model="addData.name" placeholder="请输入姓名" />
+          </el-form-item>
+          <el-form-item label="昵称" prop="nickName" class="shortItem">
+            <el-input v-model="addData.nickName" placeholder="请输入昵称" />
+          </el-form-item>
+        </el-space>
+        <el-space>
+          <el-form-item label="邮箱" prop="email" class="shortItem">
+            <el-input v-model="addData.email" placeholder="请输入邮箱" />
+          </el-form-item>
+          <el-form-item label="手机" prop="phone" class="shortItem">
+            <el-input v-model="addData.phone" placeholder="请输入手机" />
+          </el-form-item>
+        </el-space>
+        <el-form-item label="备注" prop="remark">
+          <el-input v-model="addData.remark" placeholder="请输入备注" />
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </el-container>
 </template>
 
 <script lang="ts" setup>
 import { onMounted, reactive, ref, type Ref } from 'vue';
-import { getDeptList, getUserPage } from '@/api/dept';
+import { getDeptList, getUserPage, getRoleList } from '@/api/dept';
 import type { AxiosResponse } from 'axios';
 import { ElMessage, type ElTable, type FormInstance } from 'element-plus';
-import 'http://at.alicdn.com/t/c/font_3740444_ut9ecrguym.js';
+import '@/utils/symbol.js';
 onMounted(async (): Promise<void> => {
   let res: AxiosResponse<any, any> = await getDeptList();
   ElMessage.closeAll();
@@ -128,7 +214,7 @@ const formInline = reactive({
 });
 // 表单ref
 const ruleFormRef = ref<FormInstance>();
-// 提交按钮
+// 表单提交按钮
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   await formEl.validate((valid) => {
@@ -143,6 +229,31 @@ const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.resetFields();
 };
+
+/**
+ * @button 添加按钮
+ */
+const addUser = async () => {
+  dialog.dialogAdd = true;
+  let res = await getRoleList();
+  ElMessage.closeAll();
+  selectData.value = res.data.map((item: any) => ({ label: item.name, value: item.id }));
+};
+// select数据
+const selectData: any = ref([]);
+// 添加全屏
+const fullscreen = ref(false);
+// 添加数据
+const addData: any = reactive({
+  departmentId: 1,
+  roles: [],
+  name: '',
+  username: '',
+  nickName: '',
+  email: '',
+  phone: '',
+  remark: '',
+});
 // 删除按钮
 const deleteData = () => {
   console.log(multipleSelection.value);
@@ -166,9 +277,12 @@ const tableData: Ref<Array<any>> = ref([]);
 // 获取用户列表
 const getUser = async () => {
   let res: AxiosResponse<any, any> = await getUserPage({ limit: 10, page: 1 });
-  console.log(res);
   tableData.value = res.data.list;
 };
+// 添加对话框
+const dialog = reactive({
+  dialogAdd: false,
+});
 </script>
 
 <style lang="sass" scoped>
