@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-aside width="200px">组织架构</el-aside>
+    <el-aside width="160px">组织架构</el-aside>
     <el-container>
       <el-header>
         <!-- 表单 -->
@@ -80,7 +80,7 @@
           <el-table-column align="center" prop="name" label="姓名" width="120" />
           <el-table-column align="center" prop="username" label="用户名" width="140" />
           <el-table-column align="center" prop="deptName" label="所在部门" width="120" />
-          <el-table-column align="center" prop="roleNames" label="所属角色" width="320">
+          <el-table-column align="center" prop="roleNames" label="所属角色" width="300">
             <template #default="{ row }">
               <el-space v-for="_ in row.roleNames" :key="_" :size="4">
                 <el-tag type="success">{{ _ }}</el-tag>
@@ -90,12 +90,13 @@
           <el-table-column align="center" prop="nickName" label="昵称" width="120" />
           <el-table-column align="center" prop="email" label="邮箱" width="220" />
           <el-table-column align="center" prop="phone" label="手机" width="120" />
-          <el-table-column align="center" fixed="right" label="Operations" width="120">
+          <el-table-column align="center" fixed="right" label="Operations" width="150">
             <template #default>
               <el-button link type="primary" size="small" @click="handleClick"
-                >Detail</el-button
+                >编辑</el-button
               >
-              <el-button link type="primary" size="small">Edit</el-button>
+              <el-button link type="primary" size="small">改密</el-button>
+              <el-button link type="primary" size="small">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -109,7 +110,7 @@ import { onMounted, reactive, ref, type Ref } from 'vue';
 import { getDeptList, getUserPage } from '@/api/dept';
 import type { AxiosResponse } from 'axios';
 import { ElMessage, type ElTable, type FormInstance } from 'element-plus';
-import 'http://at.alicdn.com/t/c/font_3740444_v47xvtbxf1m.js';
+import 'http://at.alicdn.com/t/c/font_3740444_ut9ecrguym.js';
 onMounted(async (): Promise<void> => {
   let res: AxiosResponse<any, any> = await getDeptList();
   ElMessage.closeAll();
