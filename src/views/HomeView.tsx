@@ -20,16 +20,12 @@ export default defineComponent({
             </el-header>
             <el-main class={homeStyle.main}>
               <el-scrollbar>
-                <RouterView />
-                {/* 切换动画 */}
-                {/* <RouterView v-slot="{ Component }">
-                  <transition
-                    enter-active-class="animate__animated animate__backInLeft"
-                    leave-active-class="animate__animated animate__backOutRight"
-                  >
-                    <component is={Component}></component>
-                  </transition>
-                </RouterView> */}
+                {/* <RouterView /> */}
+                <router-view
+                  v-slots={{
+                    default: (scope: any) => <>{scope.Component}</>,
+                  }}
+                ></router-view>
               </el-scrollbar>
             </el-main>
           </el-container>

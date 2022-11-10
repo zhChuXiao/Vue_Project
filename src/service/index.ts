@@ -1,6 +1,7 @@
 import axios from 'axios';
 import type { AxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios';
 import { ElMessage } from 'element-plus';
+import router from '@/router';
 // axios实例
 const request: AxiosInstance = axios.create({
   baseURL: 'https://nest-api.buqiyuan.site/api',
@@ -13,7 +14,7 @@ request.interceptors.request.use(
   ): AxiosRequestConfig<any> | Promise<AxiosRequestConfig<any>> => {
     // 将token存入本地存储
     let token: string | null = localStorage.getItem('token');
-    (token as string) &&
+    token! &&
       (config as AxiosRequestConfig<any>) &&
       ((config.headers as Partial<any>).authorization = token);
     return config;
@@ -32,6 +33,8 @@ request.interceptors.response.use(
       message: response?.data?.message,
       type: response?.data?.code === 200 ? 'success' : 'error',
     });
+    response?.data?.code === 11002 &&
+      (localStorage.removeItem('token'), router.replace('/login'));
 
     return response.data;
   },
