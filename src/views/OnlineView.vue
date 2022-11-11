@@ -110,7 +110,6 @@ const cancelEvent = () => {
 .search {
   width: 100%;
   height: 136px;
-  background: #fff;
   padding: 24px;
   margin-bottom: 24px;
   .form {
@@ -126,7 +125,6 @@ const cancelEvent = () => {
 .list {
   width: 100%;
   height: 100%;
-  background: #fff;
   padding: 24px;
   .title {
     display: flex;
