@@ -5,6 +5,13 @@
     }}</el-breadcrumb-item>
   </el-breadcrumb>
   <el-space>
+    <!-- 切换语言 -->
+    <el-tooltip :content="`切换语言`" placement="bottom" effect="dark">
+      <svg class="icon" aria-hidden="true" style="cursor: pointer" @click="type = !type">
+        <use xlink:href="#icon-zhongyingwen"></use>
+      </svg>
+    </el-tooltip>
+    <!-- 切换主题 -->
     <el-tooltip
       :content="`切换${theme ? '日间' : '夜间'}主题`"
       placement="bottom"
@@ -17,7 +24,8 @@
         :active-icon="Sunny"
         :inactive-icon="MoonNight"
         style="
-          margin-left: 24px;
+          margin-right: 24px;
+          margin-left: 10px;
           --el-switch-on-color: #000;
           --el-switch-off-color: #999;
           --el-switch-border-color: #777;
@@ -69,12 +77,22 @@
 <script lang="ts" setup>
 import { Sunny, MoonNight } from '@element-plus/icons-vue';
 import { ArrowRight } from '@element-plus/icons-vue';
-import { computed, ref, watch } from 'vue';
+import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { routes } from '@/router';
 import { useStore } from 'vuex';
 import heizi from '@/assets/images/heizi.jpg';
 import '@/utils/symbol.js';
+
+const _this = (getCurrentInstance() as any).proxy;
+const type = ref();
+onMounted(() => {
+  type.value = localStorage.getItem('my_locale') == 'zh' ? false : true;
+}),
+  watch(type, () => {
+    _this.$i18n.locale = type.value ? 'en' : 'zh'; // 切换语言
+    localStorage.setItem('my_locale', _this.$i18n.locale); // 设置本地存储的语言
+  });
 const route = useRoute();
 const store = useStore();
 const router = useRouter();

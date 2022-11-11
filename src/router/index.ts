@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import { ElMessage } from 'element-plus';
 import type { RouteRecordRaw } from 'vue-router';
 import type { Router, RouteLocationNormalized } from 'vue-router';
+// import { useI18n } from 'vue-i18n';
+// const { t } = useI18n();
 // 路由表
 export const routes: readonly RouteRecordRaw[] = [
   {

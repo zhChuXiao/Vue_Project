@@ -23,6 +23,9 @@ function getLocal() {
 }
 // 创建i18n实例
 export const i18n = createI18n({
+  // fallbackLocale: 'ch',
+  globalInjection: true,
+  legacy: false, // you must specify 'legacy: false' option
   locale: getLocal(),
   messages,
 });
