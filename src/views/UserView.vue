@@ -388,7 +388,7 @@ const tableData: Ref<Array<any>> = ref([]);
 // 获取用户列表
 const getUser = async () => {
   let res: AxiosResponse<any, any> = await getUserPage({ limit: 100, page: 1 });
-  tableData.value = res.data.list;
+  tableData.value = res.data?.list;
 };
 // 添加对话框
 const dialog = reactive({

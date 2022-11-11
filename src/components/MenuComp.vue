@@ -105,9 +105,7 @@ const router: Router = useRouter();
 const route = useRoute();
 
 // 选择的菜单
-const handleSelect = (index: string, indexPath: any, routeResult: any) => {
-  // console.log(index, indexPath, routeResult);
-  console.log(indexPath.join(''));
+const handleSelect = (index: string, indexPath: Array<string>) => {
   router.push({ path: indexPath.join('') });
 };
 </script>
