@@ -214,7 +214,7 @@
   </el-container>
 </template>
 
-<script lang="ts" setup>
+<script lang="tsx" setup>
 import { h, onMounted, reactive, ref, type Ref } from 'vue';
 import { getDeptList, getUserPage, getRoleList, addAdmin } from '@/api/dept';
 import type { AxiosResponse } from 'axios';
@@ -229,7 +229,7 @@ onMounted(async (): Promise<void> => {
   ElMessage.closeAll();
 });
 // 表单数据
-const formInline = reactive({
+const formInline: any = reactive({
   name: '',
   username: '',
   email: '',
@@ -240,18 +240,30 @@ const formInline = reactive({
 const ruleFormRef = ref<FormInstance>();
 // 表单提交按钮
 const submitForm = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  await formEl.validate((valid) => {
+  await formEl!.validate(async (valid) => {
     if (valid) {
-      console.log('submit!');
+      console.log(valid);
+      // 循环遍历表单绑定的对象
+      for (const key in formInline) {
+        if (formInline[key]) {
+          // 获取用户信息方法，判断不为空的字段携带到请求的参数中，并return出去
+          getUser({ [key]: formInline[key] });
+          return;
+        }
+      }
+      // 如果没有return证明所有输入框都为空，消息提示用户输入数据
+      ElNotification({
+        title: '警告',
+        message: <el-tag type="danger">请输入查询信息</el-tag>,
+        type: 'error',
+      });
     }
   });
 };
 // 重置按钮
 const resetForm = (formEl: FormInstance | undefined) => {
-  console.log(formEl);
-  if (!formEl) return;
-  formEl.resetFields();
+  formEl!.resetFields();
+  getUser();
 };
 
 /**
@@ -293,7 +305,7 @@ const addComfirm = (formEl: FormInstance | undefined) => {
         dialog.dialogAdd = false;
         ElNotification({
           title: '提示',
-          message: h('i', { style: 'color: teal' }, '添加成功'),
+          message: <el-tag type="success">添加成功</el-tag>,
         });
       }
 
@@ -386,8 +398,14 @@ const handleSelectionChange = (val: any[]) => {
 };
 const tableData: Ref<Array<any>> = ref([]);
 // 获取用户列表
-const getUser = async () => {
-  let res: AxiosResponse<any, any> = await getUserPage({ limit: 100, page: 1 });
+const getUser = async (data?: any) => {
+  let res: AxiosResponse<any, any> = await getUserPage({ limit: 100, page: 1, ...data });
+  ElMessage.closeAll();
+  ElNotification({
+    title: '成功',
+    message: <el-tag type="success">获取管理员信息成功</el-tag>,
+    type: 'success',
+  });
   tableData.value = res.data?.list;
 };
 // 添加对话框

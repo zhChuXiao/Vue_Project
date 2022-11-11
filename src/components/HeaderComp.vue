@@ -88,6 +88,7 @@ const _this = (getCurrentInstance() as any).proxy;
 const type = ref();
 onMounted(() => {
   type.value = localStorage.getItem('my_locale') == 'zh' ? false : true;
+  theme.value = store.state.user.theme;
 }),
   watch(type, () => {
     _this.$i18n.locale = type.value ? 'en' : 'zh'; // 切换语言
@@ -113,13 +114,17 @@ const setMap = (routes: any) => {
 };
 // 切换主题
 const theme = ref(false);
-watch(theme, () => {
-  if (theme.value) {
-    document.documentElement.className = 'dark';
-  } else {
-    document.documentElement.className = 'light';
-  }
-});
+watch(
+  () => theme.value,
+  () => {
+    store.commit('setTheme', theme.value);
+    if (theme.value) {
+      document.documentElement.className = 'dark';
+    } else {
+      document.documentElement.className = 'light';
+    }
+  },
+);
 setMap(routes);
 const list = computed(() => {
   return route.matched.map((item) => ({ title: item.meta.title, path: item.path }));
