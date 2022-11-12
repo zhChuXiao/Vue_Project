@@ -65,7 +65,15 @@ const submitForm = (formEl) => {
   if (!formEl) return
   formEl.validate((valid) => {
     if (valid) {
-      return console.log('submit!')
+      console.log('submit!')
+      // // 循环遍历表单绑定的对象
+      // for (const key in formInline) {
+      //   if (formInline[key]) {
+      //     // 获取用户信息方法，判断不为空的字段携带到请求的参数中，并return出去
+      //     getOnlineList({ [key]: formInline[key] });
+      //     return;
+      //   }
+      // }
     } else {
       console.log('error submit!')
       return false
@@ -76,6 +84,7 @@ const formRef = ref()
 const resetForm = (formEl) => {
   if (!formEl) return
   formEl.resetFields()
+  getOnlineList()
 }
 
 let tableData = ref([])
