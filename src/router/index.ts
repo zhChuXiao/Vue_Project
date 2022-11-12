@@ -91,7 +91,7 @@ const router: Router = createRouter({
             },
             {
               path: 'log',
-              component: (): Promise<any> => import('@/views/ScheduleLogView.vue'),
+              component: (): Promise<any> => import('@/views/LogView.vue'),
               meta: {
                 title: '任务日志',
               },
