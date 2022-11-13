@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="bottomBox">
-    <div style="background:#fff" class="jue">
+    <div class="jue">
       <div class="jueGuan">角色管理</div>
       <div class="jueRightBox">
         <el-button type="primary">新增</el-button>
@@ -28,12 +28,12 @@
     </div>
     <el-table :data="tableData" border="true" style="width: 100%">
       <el-table-column prop="序号" label="#" width="60" align="center" />
-      <el-table-column prop="name" label="名称" width="199" align="center" />
+      <el-table-column prop="name" label="名称" width="180" align="center" />
       <el-table-column prop="identification" label="标识" width="79" align="center" />
-      <el-table-column prop="remarks" label="备注" width="384" align="center" />
-      <el-table-column prop="creat" label="创建时间" width="384" align="center" />
-      <el-table-column prop="updata" label="更新时间" width="384" align="center" />
-      <el-table-column prop="address" label="操作" width="159" align="center">
+      <el-table-column prop="remarks" label="备注" width="200" align="center" />
+      <el-table-column prop="creat" label="创建时间" width="300" align="center" />
+      <el-table-column prop="updata" label="更新时间" width="300" align="center" />
+      <el-table-column prop="address" label="操作" width="150" align="center">
         <template #default>
           <el-button link type="primary" size="small">编辑</el-button>
           <el-button link type="primary" size="small">删除</el-button>
@@ -95,14 +95,17 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .topBox {
-  width: 1641px;
-  height: 112px;
-  background: #fff;
-  padding: 24px 24px 0 0;
-  margin-bottom: 16px;
-
-  .demo-form-inline {
+  width: 100%;
+  height: 136px;
+  padding: 24px;
+  margin-bottom: 24px;
+  .el-form {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .el-form-item {
+    width: 30%;
   }
 
   .queryBox {
@@ -116,15 +119,15 @@ export default defineComponent({
 }
 
 .jue {
-  width: 1633px;
+  width: 100%;
   height: 32px;
-  padding: 16px;
+  padding: 16px 0;
   display: flex;
   justify-content: space-between;
 
   .jueGuan {
     display: flex;
-    justify-content: cecnter;
+    justify-content: center;
     align-items: center;
   }
 }
