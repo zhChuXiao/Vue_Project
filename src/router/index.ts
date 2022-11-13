@@ -104,6 +104,7 @@ export const routes: readonly RouteRecordRaw[] = [
             meta: {
               title: '定时任务',
             },
+
           },
           {
             path: 'log',
@@ -111,6 +112,7 @@ export const routes: readonly RouteRecordRaw[] = [
             component: (): Promise<any> => import('@/views/LogView.vue'),
             meta: {
               title: '任务日志',
+
             },
           },
         ],

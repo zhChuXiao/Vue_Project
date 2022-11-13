@@ -78,6 +78,7 @@
       <el-menu-item index="/log">
         <template #title>
           <el-icon><Tickets /></el-icon>
+          <span   @click="$router.push({name:'log'})">任务日志</span>
           <span>{{ t('schedule.schedulelog') }}</span>
         </template>
       </el-menu-item>
