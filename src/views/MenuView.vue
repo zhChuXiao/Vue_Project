@@ -61,7 +61,7 @@
     <el-table-column prop="perms" label="权限" width="220" />
     <el-table-column prop="orderNum" label="排序号" width="120" />
     <el-table-column prop="updatedAt" label="更新时间" width="220" />
-    <el-table-column fixed="right" label="操作" width="200">
+    <el-table-column fixed="right" label="操作" width="100">
       <template #default="scope">
         <el-button link type="primary" size="small" @click="handleChange(scope.row)"
           >编辑</el-button
