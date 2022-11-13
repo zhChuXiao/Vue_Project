@@ -5,12 +5,16 @@ export default {
   state: {
     // 用户信息
     userInfo: null,
+    theme: false,
   },
   getters: {},
   mutations: {
     // 设置用户信息
     setUserInfo(state: any, payload: any) {
       state.userInfo = payload;
+    },
+    setTheme(state: any, payload: any) {
+      state.theme = payload;
     },
   },
   actions: {

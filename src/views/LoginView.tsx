@@ -1,7 +1,7 @@
-import { defineComponent, ref, getCurrentInstance, onMounted } from 'vue';
+import { defineComponent, ref, getCurrentInstance, onMounted, h } from 'vue';
 import { reactive } from 'vue';
 import { login, getImageCaptcha } from '@/api/login';
-import { ElMessage, ElMessageBox } from 'element-plus';
+import { ElMessage, ElMessageBox, ElNotification } from 'element-plus';
 import { useStore } from 'vuex';
 // 类型
 import type { Ref } from 'vue';
@@ -108,7 +108,14 @@ export default defineComponent({
                 getimgUrl();
               },
             });
-          res.code === 200 && store.dispatch('AccountInfo'), _this.$router.push('/');
+          res.code === 200 && store.dispatch('AccountInfo'),
+            _this.$router.push('/'),
+            ElMessage.closeAll(),
+            ElNotification({
+              title: '提示',
+              message: h('b', { style: 'color: teal' }, '登录成功'),
+              type: 'success',
+            });
         } else {
           console.log('error submit!');
           return false;

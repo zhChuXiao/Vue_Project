@@ -7,32 +7,32 @@
   >
     <h2 class="title">
       <el-avatar shape="square" :size="50" :src="heizi" />
-      iKun后台管理
+      {{ t('managersystem') }}
     </h2>
     <!-- 一级 系统-->
     <!-- 二级权限 -->
     <el-sub-menu index="/permssion">
       <template #title>
         <el-icon><Location /></el-icon>
-        <span>权限管理</span>
+        <span>{{ t('permssion.permssion') }}</span>
       </template>
       <!-- 三级 -->
       <el-menu-item index="/user">
         <template #title>
           <el-icon><User /></el-icon>
-          <span>用户列表</span>
+          <span>{{ t('permssion.userlist') }}</span>
         </template>
       </el-menu-item>
       <el-menu-item index="/menu">
         <template #title>
           <el-icon><SetUp /></el-icon>
-          <span>菜单列表</span>
+          <span>{{ t('permssion.menulist') }}</span>
         </template>
       </el-menu-item>
       <el-menu-item index="/role">
         <template #title>
           <el-icon><EditPen /></el-icon>
-          <span>角色列表</span>
+          <span>{{ t('permssion.rolelist') }}</span>
         </template>
       </el-menu-item>
     </el-sub-menu>
@@ -40,25 +40,25 @@
     <el-sub-menu index="/system">
       <template #title>
         <el-icon><Monitor /></el-icon>
-        <span>系统监控</span>
+        <span>{{ t('system.system') }}</span>
       </template>
       <!-- 三级 -->
       <el-menu-item index="/online">
         <template #title>
           <el-icon><Avatar /></el-icon>
-          <span>在线用户</span>
+          <span>{{ t('system.online') }}</span>
         </template>
       </el-menu-item>
       <el-menu-item index="/login-log">
         <template #title>
           <el-icon><Histogram /></el-icon>
-          <span>登录日志</span>
+          <span>{{ t('system.loginlog') }}</span>
         </template>
       </el-menu-item>
       <el-menu-item index="/serve">
         <template #title>
           <el-icon><Open /></el-icon>
-          <span>服务监控</span>
+          <span>{{ t('system.server') }}</span>
         </template>
       </el-menu-item>
     </el-sub-menu>
@@ -66,19 +66,20 @@
     <el-sub-menu index="/schedule">
       <template #title>
         <el-icon><Tickets /></el-icon>
-        <span>任务调度</span>
+        <span>{{ t('schedule.schedule') }}</span>
       </template>
       <!-- 三级 -->
       <el-menu-item index="/task">
         <template #title>
           <el-icon><Mug /></el-icon>
-          <span>定时任务</span>
+          <span>{{ t('schedule.taskschedule') }}</span>
         </template>
       </el-menu-item>
       <el-menu-item index="/log">
         <template #title>
           <el-icon><Tickets /></el-icon>
-          <span>任务日志</span>
+          <span   @click="$router.push({name:'log'})">任务日志</span>
+          <span>{{ t('schedule.schedulelog') }}</span>
         </template>
       </el-menu-item>
     </el-sub-menu>
@@ -100,27 +101,27 @@ import {
 } from '@element-plus/icons-vue';
 import heizi from '@/assets/images/heizi.jpg';
 import { useRouter, type Router, useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 // import { useStore } from 'vuex';
 const router: Router = useRouter();
 const route = useRoute();
+const { t } = useI18n();
 
 // 选择的菜单
-const handleSelect = (index: string, indexPath: any, routeResult: any) => {
-  // console.log(index, indexPath, routeResult);
-  console.log(indexPath.join(''));
+const handleSelect = (index: string, indexPath: Array<string>) => {
   router.push({ path: indexPath.join('') });
 };
 </script>
 
 <style lang="sass" scoped>
-.el-menu
-    height: 100%
-    .title
-      display: flex
-      align-items: center
-      justify-content: space-between
-      padding: 10px
-      color: deepskyblue
-      margin: 0
-      font-size: 20px
+.el-menu-vertical-demo
+  height: 100vh
+  .title
+    display: flex
+    align-items: center
+    justify-content: space-between
+    padding: 10px
+    color: deepskyblue
+    margin: 0
+    font-size: 20px
 </style>

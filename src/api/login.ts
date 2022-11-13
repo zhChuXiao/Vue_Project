@@ -29,7 +29,7 @@ export const login: (data: any) => Promise<AxiosResponse<any, any>> = (
   });
 };
 /**
- * @description 获管理员信息
+ * @description 获取管理员信息
  * @returns
  */
 export const getAccountInfo: () => Promise<AxiosResponse<any, any>> = (): Promise<

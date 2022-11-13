@@ -2,11 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router';
 import { ElMessage } from 'element-plus';
 import type { RouteRecordRaw } from 'vue-router';
 import type { Router, RouteLocationNormalized } from 'vue-router';
+// import { useI18n } from 'vue-i18n';
+// const { t } = useI18n();
 // 路由表
 export const routes: readonly RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
+    redirect: '/permssion/user',
     component: (): Promise<any> => import('@/views/HomeView'),
     meta: {
       title: '首页',
@@ -101,13 +104,15 @@ export const routes: readonly RouteRecordRaw[] = [
             meta: {
               title: '定时任务',
             },
+
           },
           {
             path: 'log',
             name: 'log',
-            component: (): Promise<any> => import('@/views/ScheduleLogView.vue'),
+            component: (): Promise<any> => import('@/views/LogView.vue'),
             meta: {
               title: '任务日志',
+
             },
           },
         ],
@@ -145,7 +150,7 @@ router.beforeEach((to: RouteLocationNormalized): any => {
   if (to.path === '/login') {
     if (isLogin() as boolean) {
       ElMessage('登录状态有效，不需要重复登录了');
-      return { name: 'home' };
+      return { path: to.fullPath };
     }
   } else if (to.path != 'login') {
     if (!isLogin() as boolean) {

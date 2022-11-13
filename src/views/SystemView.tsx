@@ -1,10 +1,13 @@
-import { defineComponent } from 'vue';
+import { defineComponent, getCurrentInstance } from 'vue';
 import { RouterView } from 'vue-router';
+
 export default defineComponent({
-  setup() {
-    return () => (
+  name: 'App',
+  setup(): () => JSX.Element {
+    const _this = (getCurrentInstance() as any).proxy;
+    return (): JSX.Element => (
       <>
-        <RouterView></RouterView>
+        <RouterView />
       </>
     );
   },
