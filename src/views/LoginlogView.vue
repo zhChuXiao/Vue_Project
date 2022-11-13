@@ -199,14 +199,14 @@
   <style lang="scss" scoped>
 
   .all{
-    background-color: #e5e7eb;
+    // background-color: #e5e7eb;
     padding: 20px;
     width: 100%;
     height: 1000px;
       .top{
     width: 100%;
     height: 100px;
-    background-color: white;
+    // background-color: white;
     padding: 20px;
           span{
             margin-left: 10px;
@@ -220,7 +220,7 @@
       .title{
         width: 100%;
         height: 60px;
-        background-color: white;
+        // background-color: white;
         line-height: 60px;
         border-bottom: 1px solid #ddd;
         display: flex;
