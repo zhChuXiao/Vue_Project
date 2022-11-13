@@ -50,7 +50,6 @@
         </el-icon>
       </div>
     </div>
-<<<<<<< HEAD
     <el-table :data="tableData" border="true" style="width: 100%">
       <el-table-column prop="序号" label="#" width="60" align="center" />
       <el-table-column prop="name" label="名称" width="180" align="center" />
@@ -60,17 +59,6 @@
       <el-table-column prop="updata" label="更新时间" width="300" align="center" />
       <el-table-column prop="address" label="操作" width="150" align="center">
         <template #default>
-=======
-    <el-table :data="tableData" :border="true" style="width: 99.15%">
-      <el-table-column prop="id" label="#" width="60" align="center" />
-      <el-table-column prop="name" label="名称" width="199" align="center" />
-      <el-table-column prop="label" label="标识" width="79" align="center" />
-      <el-table-column prop="remarks" label="备注" width="384" align="center" />
-      <el-table-column prop="createdAt" label="创建时间" width="384" align="center" />
-      <el-table-column prop="updatedAt" label="更新时间" width="384" align="center" />
-      <el-table-column prop="address" label="操作" width="159" align="center">
-        <template #default="scope">
->>>>>>> 8b76ed7c7ffa7615e50b7cd74d8fde6ff839d305
           <el-button link type="primary" size="small">编辑</el-button>
           <el-button link type="primary" size="small" @click="delData(scope.row)">删除</el-button>
         </template>
